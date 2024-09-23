@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPF Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .slider-label {
+      margin-bottom: 0.5rem;
+    }
+    .result-section {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <!-- Monthly Salary -->
+          <div class="mb-3">
+            <label for="salary" class="form-label slider-label">Monthly salary (Basic + DA)</label>
+            <input type="range" class="form-range" id="salary" min="10000" max="200000" step="1000" value="50000" oninput="updateValue(this, 'salary-value')">
+            <input type="text" class="form-control" id="salary-value" value="₹ 50000" readonly>
+          </div>
+
+          <!-- Age -->
+          <div class="mb-3">
+            <label for="age" class="form-label slider-label">Your age</label>
+            <input type="range" class="form-range" id="age" min="18" max="60" value="30" oninput="updateValue(this, 'age-value')">
+            <input type="text" class="form-control" id="age-value" value="30 Yr" readonly>
+          </div>
+
+          <!-- EPF Contribution -->
+          <div class="mb-3">
+            <label for="epf-contribution" class="form-label slider-label">Your contribution to EPF</label>
+            <input type="range" class="form-range" id="epf-contribution" min="8" max="20" value="12" step="0.5" oninput="updateValue(this, 'epf-value')">
+            <input type="text" class="form-control" id="epf-value" value="12%" readonly>
+          </div>
+
+          <!-- Annual Salary Increase -->
+          <div class="mb-3">
+            <label for="annual-increase" class="form-label slider-label">Annual increase in salary</label>
+            <input type="range" class="form-range" id="annual-increase" min="1" max="10" value="5" step="0.1" oninput="updateValue(this, 'increase-value')">
+            <input type="text" class="form-control" id="increase-value" value="5%" readonly>
+          </div>
+
+          <!-- Rate of Interest -->
+          <div class="mb-3">
+            <label for="rate-of-interest" class="form-label slider-label">Rate of interest</label>
+            <input type="range" class="form-range" id="rate-of-interest" min="5" max="10" value="8.1" step="0.1" oninput="updateValue(this, 'interest-value')">
+            <input type="text" class="form-control" id="interest-value" value="8.1%" readonly>
+          </div>
+
+          <!-- Result Section -->
+          <div class="result-section">
+            <p>You will have accumulated</p>
+            <p id="total-savings">₹ 2,53,46,997</p>
+            <p>by the time you retire</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateValue(slider, outputId) {
+      const value = slider.value;
+      const output = document.getElementById(outputId);
+      
+      if (outputId === 'salary-value') {
+        output.value = '₹ ' + new Intl.NumberFormat().format(value);
+      } else if (outputId === 'age-value') {
+        output.value = value + ' Yr';
+      } else if (outputId === 'epf-value' || outputId === 'increase-value' || outputId === 'interest-value') {
+        output.value = value + '%';
+      }
+      // Update the calculation logic here for real-time results if needed.
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
